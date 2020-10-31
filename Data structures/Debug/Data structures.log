@@ -1,0 +1,60 @@
+﻿  Data structures.cpp
+C:\Users\Maria\source\repos\Data structures\Data structures\SinglyLinkedList.hpp(141,12): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Maria\source\repos\Data structures\Data structures\SinglyLinkedList.hpp(140): message : while compiling class template member function 'void SinglyLinkedList<int>::insertAt(const T &,int)'
+          with
+          [
+              T=int
+          ]
+C:\Users\Maria\source\repos\Data structures\Data structures\Data structures.cpp(17): message : see reference to class template instantiation 'SinglyLinkedList<int>' being compiled
+C:\Users\Maria\source\repos\Data structures\Data structures\SinglyLinkedList.hpp(225,25): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Maria\source\repos\Data structures\Data structures\SinglyLinkedList.hpp(224): message : while compiling class template member function 'T SinglyLinkedList<T>::removeAt(int)'
+          with
+          [
+              T=int
+          ]
+C:\Users\Maria\source\repos\Data structures\Data structures\SinglyLinkedList.hpp(256,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Maria\source\repos\Data structures\Data structures\SinglyLinkedList.hpp(251): message : while compiling class template member function 'const T &SinglyLinkedList<T>::operator [](size_t) const'
+          with
+          [
+              T=int
+          ]
+C:\Users\Maria\source\repos\Data structures\Data structures\DoublyLinkedList.hpp(144,12): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Maria\source\repos\Data structures\Data structures\DoublyLinkedList.hpp(143): message : while compiling class template member function 'void DoublyLinkedList<int>::insertAt(const T &,int)'
+          with
+          [
+              T=int
+          ]
+C:\Users\Maria\source\repos\Data structures\Data structures\Data structures.cpp(27): message : see reference to function template instantiation 'void DoublyLinkedList<int>::insertAt(const T &,int)' being compiled
+          with
+          [
+              T=int
+          ]
+C:\Users\Maria\source\repos\Data structures\Data structures\Data structures.cpp(24): message : see reference to class template instantiation 'DoublyLinkedList<int>' being compiled
+C:\Users\Maria\source\repos\Data structures\Data structures\DoublyLinkedList.hpp(232,25): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Maria\source\repos\Data structures\Data structures\DoublyLinkedList.hpp(231): message : while compiling class template member function 'T DoublyLinkedList<T>::removeAt(int)'
+          with
+          [
+              T=int
+          ]
+C:\Users\Maria\source\repos\Data structures\Data structures\Data structures.cpp(28): message : see reference to function template instantiation 'T DoublyLinkedList<T>::removeAt(int)' being compiled
+          with
+          [
+              T=int
+          ]
+C:\Users\Maria\source\repos\Data structures\Data structures\DoublyLinkedList.hpp(261,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Maria\source\repos\Data structures\Data structures\DoublyLinkedList.hpp(256): message : while compiling class template member function 'const T &DoublyLinkedList<T>::operator [](size_t) const'
+          with
+          [
+              T=int
+          ]
+C:\Users\Maria\source\repos\Data structures\Data structures\SinglyLinkedList.hpp(84,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Maria\source\repos\Data structures\Data structures\SinglyLinkedList.hpp(81): message : while compiling class template member function 'void SinglyLinkedList<int>::getNode(int,SinglyLinkedList<int>::Node *&)'
+C:\Users\Maria\source\repos\Data structures\Data structures\SinglyLinkedList.hpp(152): message : see reference to function template instantiation 'void SinglyLinkedList<int>::getNode(int,SinglyLinkedList<int>::Node *&)' being compiled
+C:\Users\Maria\source\repos\Data structures\Data structures\SinglyLinkedList.hpp(90): message : while compiling class template member function 'SinglyLinkedList<int>::SinglyLinkedList(void)'
+C:\Users\Maria\source\repos\Data structures\Data structures\Data structures.cpp(17): message : see reference to function template instantiation 'SinglyLinkedList<int>::SinglyLinkedList(void)' being compiled
+C:\Users\Maria\source\repos\Data structures\Data structures\DoublyLinkedList.hpp(85,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Maria\source\repos\Data structures\Data structures\DoublyLinkedList.hpp(82): message : while compiling class template member function 'void DoublyLinkedList<int>::getNode(int,DoublyLinkedList<int>::Node *&)'
+C:\Users\Maria\source\repos\Data structures\Data structures\DoublyLinkedList.hpp(155): message : see reference to function template instantiation 'void DoublyLinkedList<int>::getNode(int,DoublyLinkedList<int>::Node *&)' being compiled
+C:\Users\Maria\source\repos\Data structures\Data structures\DoublyLinkedList.hpp(91): message : while compiling class template member function 'DoublyLinkedList<int>::DoublyLinkedList(void)'
+C:\Users\Maria\source\repos\Data structures\Data structures\Data structures.cpp(24): message : see reference to function template instantiation 'DoublyLinkedList<int>::DoublyLinkedList(void)' being compiled
+  Data structures.vcxproj -> C:\Users\Maria\source\repos\Data structures\Debug\Data structures.exe
