@@ -1,4 +1,5 @@
 #include "List.h"
+#include "Iterator.hpp"
 
 template <typename T>
 class DoublyLinkedList : public List<T>
@@ -33,7 +34,7 @@ public:
 	void pushFront(const T& el); // O(1)
 	void insertAt(const T& el, int index); // O(n)
 
-	T getAt(int index); // O(n)
+	T getAt(size_t index); // O(n)
 
 	T popBack(); // O(1)
 	T popFront(); // O(1)
@@ -45,6 +46,42 @@ public:
 	size_t getSize() const;
 
 	void print() const;
+
+	class DoublyLLIterator : public Iterator<T>
+	{
+		Node* currentNode;
+
+	public:
+		DoublyLLIterator(Node* currentNode) : currentNode(currentNode) {}
+
+		T& operator*()
+		{
+			return currentNode->data;
+		}
+		void operator++()
+		{
+			if (currentNode != nullptr)
+				currentNode = currentNode->next;
+		}
+		void operator--()
+		{
+			if (currentNode->previous != nullptr)
+				currentNode = currentNode->previous;
+		}
+		bool operator!=(Iterator<T>& other)
+		{
+			DoublyLLIterator* otherPtr = (DoublyLLIterator*)&other;
+			return currentNode != otherPtr->currentNode;
+		}
+	};
+	DoublyLLIterator begin()
+	{
+		return DoublyLLIterator(head);
+	}
+	DoublyLLIterator end()
+	{
+		return DoublyLLIterator(nullptr);
+	}
 };
 
 template<typename T>
@@ -133,10 +170,12 @@ void DoublyLinkedList<T>::pushFront(const T& el)
 
 	if (isEmpty())
 		head = tail = newNode;
-
-	newNode->next = head;
-	head->previous = newNode;
-	head = newNode;
+	else
+	{
+		newNode->next = head;
+		head->previous = newNode;
+		head = newNode;
+	}
 }
 template<typename T>
 void DoublyLinkedList<T>::insertAt(const T& el, int index)
@@ -166,7 +205,7 @@ void DoublyLinkedList<T>::insertAt(const T& el, int index)
 }
 
 template<typename T>
-T DoublyLinkedList<T>::getAt(int index)
+T DoublyLinkedList<T>::getAt(size_t index)
 {
 	return this->operator[](index);
 }

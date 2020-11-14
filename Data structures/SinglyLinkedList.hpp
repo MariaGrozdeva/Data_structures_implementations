@@ -1,3 +1,5 @@
+#pragma once
+
 #include "List.h"
 
 template <typename T>
@@ -32,7 +34,7 @@ public:
 	void pushFront(const T& el); // O(1)
 	void insertAt(const T& el, int index); // O(n)
 
-	T getAt(int index); // O(n)
+	T getAt(size_t index); // O(n)
 
 	T popBack(); // O(n)
 	T popFront(); // O(1)
@@ -131,9 +133,11 @@ void SinglyLinkedList<T>::pushFront(const T& el)
 
 	if (isEmpty())
 		head = tail = newNode;
-
-	newNode->next = head;
-	head = newNode;
+	else
+	{
+		newNode->next = head;
+		head = newNode;
+	}
 }
 template<typename T>
 void SinglyLinkedList<T>::insertAt(const T& el, int index)
@@ -160,7 +164,7 @@ void SinglyLinkedList<T>::insertAt(const T& el, int index)
 }
 
 template<typename T>
-T SinglyLinkedList<T>::getAt(int index)
+T SinglyLinkedList<T>::getAt(size_t index)
 {
 	return this->operator[](index);
 }

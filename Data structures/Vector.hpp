@@ -1,4 +1,5 @@
 ﻿#include "List.h"
+#include "Iterator.hpp"
 
 template <typename T>
 class Vector : public List<T>
@@ -25,7 +26,7 @@ public:
 	void pushFront(const T& el); // O(n)
 	void insertAt(const T& el, int index); // O(n)
 
-	T getAt(int index); // O(1)
+	T getAt(size_t index); // O(1)
 
 	T popBack(); // O(n) -> но O(1) амортизирано (константно амортизирано)
 	T popFront(); // O(n)
@@ -37,6 +38,50 @@ public:
 	size_t getSize() const;
 
 	void print() const;
+
+	class VectorIterator : public Iterator<T>
+	{
+		T* currentElement;
+		int index; // count
+		int size; // capacity
+
+	public:
+		VectorIterator(T* currentElement, int index, int size) : currentElement(currentElement), index(index), size(size) {}
+
+		T& operator*()
+		{
+			return *currentElement;
+		}
+		void operator++()
+		{
+			if (index < size - 1)
+			{
+				currentElement++;
+				index++;
+			}
+		}
+		void operator--()
+		{
+			if (index > 0)
+			{
+				currentElement--;
+				index--;
+			}
+		}
+		bool operator!=(Iterator<T>& other)
+		{
+			VectorIterator* otherPtr = (VectorIterator*)&other;
+			return currentElement != otherPtr->currentElement;
+		}
+	};
+	VectorIterator begin()
+	{
+		return VectorIterator(&data[0], 0, count);
+	}
+	VectorIterator end()
+	{
+		return VectorIterator(nullptr, count, count);
+	}
 };
 
 int closestPowerOfTwo(int n)
@@ -150,7 +195,7 @@ void Vector<T>::insertAt(const T& el, int index)
 }
 
 template <typename T>
-T Vector<T>::getAt(int index)
+T Vector<T>::getAt(size_t index)
 {
 	if (index < 0 || index >= count)
 		throw "Error! Invalid index!";
