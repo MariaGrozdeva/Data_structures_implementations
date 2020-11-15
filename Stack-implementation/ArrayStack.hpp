@@ -23,9 +23,9 @@ public:
 	ArrayStack<T>& operator=(const ArrayStack<T>& other);
 	~ArrayStack();
 
-	void push(T element);
-	void pop();
-	T top();
+	void push(T element); // O(1)
+	void pop(); // O(1)
+	T top(); // O(1)
 	void print() const;
 };
 
