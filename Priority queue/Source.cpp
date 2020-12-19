@@ -5,9 +5,7 @@ void heapSort(vector<int>& v) // O(nlog(n))
 	PriorityQueue<int> q(v); 
 
 	for (int i = v.size() - 1; i >= 0; i--) // O(n)
-	{
 		v[i] = q.pullHighestPriorityElement(); // O(log(n))
-	}
 }
 
 int main()
