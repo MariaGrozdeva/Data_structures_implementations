@@ -8,8 +8,10 @@
 2. За всяко извикване на функцията addEdge добавяме две ребра - по едно за всяка посока.
 
 **Списък на наследници. (Adjacency list)**  
-![alt text](https://i.ibb.co/yPPp6Ds/adj-List-Graph.jpg)
-* Матрица на съседство (Adjacency matrix)
-![alt text](https://i.ibb.co/yqJbWLW/adj-Matrix-Graph.jpg)
-* Списък на ребрата (Edges list)
-![alt text](https://i.ibb.co/yVS2sBM/edge-List-Graph.jpg)
+![alt text](https://i.ibb.co/yPPp6Ds/adj-List-Graph.jpg)  
+
+**Матрица на съседство (Adjacency matrix)**  
+![alt text](https://i.ibb.co/yqJbWLW/adj-Matrix-Graph.jpg)  
+
+**Списък на ребрата (Edges list)**  
+![alt text](https://i.ibb.co/yVS2sBM/edge-List-Graph.jpg)  
