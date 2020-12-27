@@ -10,8 +10,8 @@
 **Списък на наследници. (Adjacency list)**  
 ![alt text](https://i.ibb.co/yPPp6Ds/adj-List-Graph.jpg)  
 
-**Матрица на съседство (Adjacency matrix)**  
+**Матрица на съседство. (Adjacency matrix)**  
 ![alt text](https://i.ibb.co/yqJbWLW/adj-Matrix-Graph.jpg)  
 
-**Списък на ребрата (Edges list)**  
+**Списък на ребра. (Edges list)**  
 ![alt text](https://i.ibb.co/yVS2sBM/edge-List-Graph.jpg)  
