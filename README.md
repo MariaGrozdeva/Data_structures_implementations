@@ -51,3 +51,9 @@
 * **Двоична пирамида (Binary heap)**.  
 [visualisation]( https://visualgo.net/en/heap)
 * **Троична пирамида (Ternary heap)**.  
+
+**4.Графи**.  
+Реализации с: 
+* Списък на наследници. (Adjacency list) - 
+* Матрица на съседство (Adjacency matrix)
+* Списък на ребрата (Edges list)
