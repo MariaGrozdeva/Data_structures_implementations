@@ -8,6 +8,6 @@
 2. За всяко извикване на функцията addEdge добавяме две ребра - по едно за всяка посока.
 
 **Списък на наследници. (Adjacency list)**  
-![alt text](C:/Users/Maria/source/repos/Data structures/Graphs/adjListGraph.png)
+![alt text]("adjListGraph.png")
 * Матрица на съседство (Adjacency matrix)
 * Списък на ребрата (Edges list)
