@@ -7,7 +7,7 @@
 1. Всички ребра в тегловния граф направим с тегло 1.
 2. За всяко извикване на функцията addEdge добавяме две ребра - по едно за всяка посока.
 
-**Списък на наследници. (Adjacency list)**
-![alt text](C:\Users\Maria\source\repos\Data structures\Graphs\adjListGraph.jpg)
+**Списък на наследници. (Adjacency list)**  
+![alt text](C:/Users/Maria/source/repos/Data structures/Graphs/adjListGraph.jpg)
 * Матрица на съседство (Adjacency matrix)
 * Списък на ребрата (Edges list)
