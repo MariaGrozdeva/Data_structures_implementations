@@ -21,7 +21,8 @@ int main()
 	g.addEdge(5, 4, 10);
 
 	vector<int> path;
-	cout << Dijkstra(g, 0, 4, path);
+	cout << Dijkstra(g, 0, 4, path) << endl;
+
 	for (int i = 0; i < path.size(); i++)
 		cout << path[i] << " ";
 }
