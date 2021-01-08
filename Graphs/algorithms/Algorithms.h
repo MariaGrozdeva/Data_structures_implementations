@@ -1,6 +1,6 @@
 #include <queue>
 #include <stack>
-#include "C:\Users\Maria\source\repos\Data structures\Graphs\graphAbstract\Graph.h"
+#include "Graph.h"
 
 void BFS(const Graph& g, int start);
 void DFS(const Graph& g, int start);
