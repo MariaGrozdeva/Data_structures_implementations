@@ -56,8 +56,6 @@ void DFS(const Graph& g, int start)
 		for (size_t i = 0; i < adjacent.size(); i++)
 			s.push(adjacent[i].first);
 	}
-
-	s.push(start);
 }
 
 bool BFS_containsPath(const Graph& g, int start, int end)
