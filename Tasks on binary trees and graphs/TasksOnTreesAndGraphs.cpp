@@ -38,6 +38,28 @@ public:
 		return adjList.size();
 	}
 };
+class GraphChar
+{
+private:
+	vector<vector<char>> adjList;
+
+public:
+	GraphChar(int n) : adjList(n) {}
+
+	void addEdge(char start, char end)
+	{
+		adjList[start].push_back(end);
+		adjList[end].push_back(start);
+	}
+	vector<char> getSuccessors(char vertex) const
+	{
+		return adjList[vertex];
+	}
+	int getVertexCount() const
+	{
+		return adjList.size();
+	}
+};
 
 
 // ДЪРВЕТА
@@ -94,6 +116,63 @@ void getWordsDFS(Node<char>* root, vector<string>& words, string tempWord = "")
 
 	getWordsDFS(root->left, words, tempWord);
 	getWordsDFS(root->right, words, tempWord);
+}
+
+// Задача 3: Напишете функция, която приема двоично дърво и връща дали в дървото има път от листо до друго листо само с четни числа.
+void getAllPaths(Node<int>* root, vector<vector<int>>& paths, vector<int>& currentPath)
+{
+	if (!root)
+		return;
+
+	if (root->data % 2)
+		return;
+
+	if (!root->left && !root->right)
+	{
+		paths.push_back(currentPath);
+		return;
+	}
+
+	currentPath.push_back(root->data);
+
+	getAllPaths(root->left, paths, currentPath);
+	getAllPaths(root->right, paths, currentPath);
+
+	currentPath.pop_back();
+}
+bool existsEvenPathFromLeafToLeaf(Node<int>* root)
+{
+	vector<vector<int>> paths;
+	vector<int> path;
+
+	getAllPaths(root, paths, path);
+
+	return paths.size() > 1 ? true : false;
+}
+
+// Задача 4: Напишете функция, която приема двоично дърво А и двоично дърво Б и проверява дали Б е поддърво на А.
+bool checkIfSubtree(Node<int>* rootA, Node<int>* rootB)
+{
+	if (!rootB)
+		return true;
+
+	if (rootA->data == rootB->data)
+		return checkIfSubtree(rootA->left, rootB->left) && checkIfSubtree(rootA->right, rootB->right);
+
+	return false;
+}
+bool isSubtree(Node<int>* rootA, Node<int>* rootB)
+{
+	if (!rootA)
+		return false;
+
+	if (rootA->data == rootB->data)
+	{
+		if (checkIfSubtree(rootA->left, rootB->left) && checkIfSubtree(rootA->right, rootB->right))
+			return true;
+	}
+
+	return isSubtree(rootA->left, rootB) || isSubtree(rootA->right, rootB);
 }
 
 
@@ -334,20 +413,59 @@ int getMinNumOfPeopleInCharge(const Graph& g)
 	return minNumOfPeopleInCharge;
 }
 
+// Задача 6: Напишете функция, която приема граф, чийто върхове са от символи, и по подадена дума проверява дали има такъв път в графа.
+bool DFS_containsPath(const GraphChar& g, char start, char end, const string& word)
+{
+	vector<char> visited(g.getVertexCount(), false);
+	stack<char> s;
+
+	s.push(start);
+	int currentIndex = 0;
+
+	while (!s.empty())
+	{
+		char currentVertex = s.top();
+		s.pop();
+
+		if (currentVertex == end && currentIndex == word.size() - 1)
+			return true;
+
+		if (visited[currentVertex] || currentVertex != word[currentIndex] - 'a')
+			continue;
+
+		currentIndex++;
+		visited[currentVertex] = true;
+
+		vector<char> successors = g.getSuccessors(currentVertex);
+		for (int i = 0; i < successors.size(); i++)
+			s.push(successors[i]);
+	}
+	return false;
+}
+bool checkIfPathExist(const GraphChar& g, const string& word)
+{
+	char start = word[0] - 'a';
+	char end = word[word.size() - 1] - 'a';
+
+	return DFS_containsPath(g, start, end, word);
+}
+
 
 int main()
 {
-	int n, m;
-	cin >> n >> m;
-
-	Graph students(n);
-	for (int i = 0; i < m; i++)
-	{
-		int start, end;
-		cin >> start >> end;
-
-		students.addEdge(start, end);
-	}
-
-	cout << getMinNumOfPeopleInCharge(students);
+	Node<int>* rootA = new Node<int>(4);
+	Node<int>* n1 = new Node<int>(2);
+	Node<int>* n2 = new Node<int>(8);
+	Node<int>* n3 = new Node<int>(7);
+	Node<int>* n4 = new Node<int>(4);
+	Node<int>* n5 = new Node<int>(9);
+	Node<int>* n6 = new Node<int>(16);
+	Node<int>* n7 = new Node<int>(12);
+	rootA->left = n1;
+	rootA->right = n4;
+	n1->left = n2;
+	n1->right = n3;
+	n4->left = n5;
+	n4->right = n6;
+	n6->right = n7;
 }
