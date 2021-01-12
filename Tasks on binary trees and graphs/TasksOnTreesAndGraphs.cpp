@@ -16,6 +16,18 @@ struct Node
 	Node(T data) : data(data), left(nullptr), right(nullptr) {}
 };
 
+template <typename T>
+void Free(Node<T>* root)
+{
+	if (!root)
+		return;
+
+	Free(root->left);
+	Free(root->right);
+
+	delete root;
+}
+
 class Graph
 {
 private:
@@ -49,7 +61,7 @@ public:
 	void addEdge(char start, char end)
 	{
 		adjList[start].push_back(end);
-		adjList[end].push_back(start);
+		//adjList[end].push_back(start);
 	}
 	vector<char> getSuccessors(char vertex) const
 	{
@@ -173,6 +185,117 @@ bool isSubtree(Node<int>* rootA, Node<int>* rootB)
 	}
 
 	return isSubtree(rootA->left, rootB) || isSubtree(rootA->right, rootB);
+}
+
+struct NodeFull
+{
+	int data;
+	vector<NodeFull*> children;
+
+	NodeFull(int data) : data(data) {}
+};
+// Задача 5: Напишете функция, която проверява дали дърво с произволен брой наследници погледнато от ляво е същото като погледнато от дясно.
+bool isTreeSeenTheSameFromBothSides(NodeFull* root, vector<int>& view)
+{
+	vector<NodeFull*> current;
+	current.push_back(root);
+
+	while (!current.empty())
+	{
+		vector<NodeFull*> next;
+
+		if (current[0]->data != current[current.size() - 1]->data)
+		{
+			view.clear();
+			return false;
+		}
+
+		view.push_back(current[0]->data);
+
+		for (int i = 0; i < current.size(); i++)
+			next.insert(next.end(), current[i]->children.begin(), current[i]->children.end());
+
+		current = next;
+	}
+
+	return true;
+}
+
+// Задача 6: Задача 5, но за двоично дърво.
+bool isTreeSeenTheSameFromBothSides(Node<int>* root, vector<int>& view)
+{
+	vector<Node<int>*> current;
+	current.push_back(root);
+
+	while (!current.empty())
+	{
+		vector<Node<int>*> next;
+
+		if (current[0]->data != current[current.size() - 1]->data)
+		{
+			view.clear();
+			return false;
+		}
+
+		view.push_back(current[0]->data);
+
+		for (int i = 0; i < current.size(); i++)
+		{
+			if (current[i]->left)
+				next.push_back(current[i]->left);
+			if (current[i]->right)
+				next.push_back(current[i]->right);
+		}
+
+		current = next;
+	}
+
+	return true;
+}
+
+// Задача 7: Дадено е дърво с произволен брой наследници. "Хубав път" в дървото ще наричаме такъв път, 
+// в който стойността на всеки връх се дели на стойността на следващия. Напишете функция, която приема такова дърво 
+// и връща най-дългия "хубав път" започващ от корена.
+void getLongestPrettyPath(NodeFull* root, vector<int>& path)
+{
+	path.push_back(root->data);
+	vector<int> longestPath;
+
+	for (int i = 0; i < root->children.size(); i++)
+	{
+		if (!root->children[i]->data || !root->data % root->children[i]->data)
+			continue;
+
+		vector<int> subPath;
+		getLongestPrettyPath(root->children[i], subPath);
+
+		if (subPath.size() > longestPath.size())
+			longestPath = subPath;
+	}
+
+	path.insert(path.end(), longestPath.begin(), longestPath.end());
+}
+
+// Задача 8: Задача 7, но за двоично дърво.
+void getLongestPrettyPath(Node<int>* root, vector<int>& path)
+{
+	if (!root)
+		return;
+
+	path.push_back(root->data);
+	
+	vector<int> longestSubPath;
+	vector<int> subPathLeft;
+	vector<int> subPathRight;
+
+	if (root->left && root->left->data && !(root->data % root->left->data))
+		getLongestPrettyPath(root->left, subPathLeft);
+	if (root->right && root->right->data && !(root->data % root->right->data))
+		getLongestPrettyPath(root->right, subPathRight);
+
+	longestSubPath = subPathLeft.size() > subPathRight.size() ? subPathLeft : subPathRight;
+
+	path.insert(path.end(), longestSubPath.begin(), longestSubPath.end());
 }
 
 
@@ -450,22 +573,109 @@ bool checkIfPathExist(const GraphChar& g, const string& word)
 	return DFS_containsPath(g, start, end, word);
 }
 
+// Задача 7: Напишете функция, която приема граф, чийто върхове са от числа. Функцията да връща сумата на всички върхове, които са на четно
+// разстояние от стартовия и сумата на всички върхове, които са на нечетно разстояние.
+void BFS_getSumsOfVertices(const Graph& g, int start, int& sumOfEvenDistVertices, int& sumOfOddDistVertices)
+{
+	vector<int> visited(g.getVertexCount(), false);
+	queue<pair<int, int>> q;
+
+	vector<int> successorsDistFromStart(g.getVertexCount(), 0);
+
+	q.push(make_pair(start, 0));
+	visited[start] = true;
+
+	while (!q.empty())
+	{
+		pair<int,int> currentVertex = q.front();
+		q.pop();
+
+		if (currentVertex.second % 2)
+			sumOfOddDistVertices += currentVertex.first;
+		else
+			sumOfEvenDistVertices += currentVertex.first;
+
+		vector<int> successors = g.getSuccessors(currentVertex.first);
+
+		for (int i = 0; i < successors.size(); i++)
+		{
+			if (visited[successors[i]])
+				continue;
+			visited[successors[i]] = true;
+
+			q.push(make_pair(successors[i], currentVertex.second + 1));
+		}
+	}
+}
+
+// Задача 8: Напишете функция, която намира сумата на най- големите елементи на отделни свързани компоненти в граф.
+int BFS_maxElInComponentOfGraph(const Graph& g, int start, vector<bool>& visited)
+{
+	queue<int> q;
+	int maxVertex = start;
+
+	q.push(start);
+	visited[start] = true;
+
+	while (!q.empty())
+	{
+		int currentVertex = q.front();
+		q.pop();
+
+		if (currentVertex > maxVertex)
+			maxVertex = currentVertex;
+
+		vector<int> successors = g.getSuccessors(currentVertex);
+		for (int i = 0; i < successors.size(); i++)
+		{
+			if (visited[successors[i]])
+				continue;
+			visited[successors[i]] = true;
+
+			q.push(successors[i]);
+		}
+	}
+
+	return maxVertex;
+}
+int getSumOfMaxElInComponentOfGraph(const Graph& g)
+{
+	int sum = 0;
+
+	vector<bool> visited(g.getVertexCount(), false);
+	for (int i = 0; i < visited.size(); i++)
+	{
+		if (visited[i])
+			continue;
+
+		sum += BFS_maxElInComponentOfGraph(g, i, visited);
+	}
+
+	return sum;
+}
+
+
+// ЗАДАЧА- ГРАФ И ДЪРВО:
+// Нека имаме ориентиран граф от символи g и двоично дърво от символи t. 
+// Множеството от елементите на двете структури е едно и също, като в рамките на всяка една от структурите символите са уникални. 
+// Напишете функция, която проверява дали съществува път от корена на дървото до листо, който да отговаря на път в графа, 
+// и ако има такъв, да го извежда (ЗАБ.: достатъчно е да изведете само един път, който да отговаря на условието).
+bool checkIfGraphContainsPathFromTree(Node<char>* root, GraphChar g)
+{
+	vector<string> paths;
+	getWordsDFS(root, paths);
+
+	for (int i = 0; i < paths.size(); i++)
+	{
+		if (checkIfPathExist(g, paths[i]))
+			return true;
+	}
+
+	return false;
+}
+
 
 int main()
 {
-	Node<int>* rootA = new Node<int>(4);
-	Node<int>* n1 = new Node<int>(2);
-	Node<int>* n2 = new Node<int>(8);
-	Node<int>* n3 = new Node<int>(7);
-	Node<int>* n4 = new Node<int>(4);
-	Node<int>* n5 = new Node<int>(9);
-	Node<int>* n6 = new Node<int>(16);
-	Node<int>* n7 = new Node<int>(12);
-	rootA->left = n1;
-	rootA->right = n4;
-	n1->left = n2;
-	n1->right = n3;
-	n4->left = n5;
-	n4->right = n6;
-	n6->right = n7;
+	
 }
