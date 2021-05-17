@@ -177,6 +177,48 @@ bool isCyclic(const Graph& g)
 	return false;
 }
 
+// Tarjan's algorithm
+void DFSrec_topologicalSorting(const Graph& g, vector<bool>& visited, stack<int>& currentRes, int currentVertex)
+{
+	visited[currentVertex] = true;
+		
+	vector<pair<int, int>> adjacent = g.getSuccessors(currentVertex);
+
+	for (int i = 0; i < adjacent.size(); i++)
+	{
+		int current = adjacent[i].first;
+
+		if (visited[current])
+			continue;
+
+		DFSrec_topologicalSorting(g, visited, currentRes, current);
+	}
+
+	currentRes.push(currentVertex);
+}
+void topologicalSorting(const Graph& g, vector<int>& topoSort)
+{
+	if (isCyclic(g))
+		throw "Only acyclic graphs can be sorted topologically!";
+
+	vector<bool> visited(g.getNumOfVertices());
+	stack<int> result;
+
+	for (int i = 0; i < visited.size(); i++)
+	{
+		if (visited[i])
+			continue;
+
+		DFSrec_topologicalSorting(g, visited, result, i);
+	}
+
+	while (!result.empty())
+	{
+		topoSort.push_back(result.top());
+		result.pop();
+	}
+}
+
 int Dijkstra(const Graph& g, int start, int end, vector<int>& path)
 {
 	vector<int> dist(g.getNumOfVertices(), INT_MAX);
