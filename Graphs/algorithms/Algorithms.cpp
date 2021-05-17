@@ -177,7 +177,6 @@ bool isCyclic(const Graph& g)
 	return false;
 }
 
-// Tarjan's algorithm
 void DFSrec_topologicalSorting(const Graph& g, vector<bool>& visited, stack<int>& currentRes, int currentVertex)
 {
 	visited[currentVertex] = true;
