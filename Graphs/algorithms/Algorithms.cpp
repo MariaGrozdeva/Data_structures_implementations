@@ -136,6 +136,47 @@ bool connected(const Graph& g)
 	return BFS_connected(g);
 }
 
+bool DFS_containsCycle(const Graph& g, vector<bool>& visited, vector<bool>& stack, int currentVertex)
+{
+	visited[currentVertex] = true;
+	stack[currentVertex] = true;
+
+	vector<pair<int, int>> adjacent = g.getSuccessors(currentVertex);
+
+	for (size_t i = 0; i < adjacent.size(); i++)
+	{
+		int current = adjacent[i].first;
+		if (stack[current])
+			return true;
+
+		bool containsCycle = DFS_containsCycle(g, visited, stack, current);
+
+		if (containsCycle)
+			return true;
+	}
+
+	stack[currentVertex] = false;
+	return false;
+}
+bool isCyclic(const Graph& g)
+{
+	vector<bool> visited(g.getNumOfVertices());
+	vector<bool> stack(g.getNumOfVertices());
+
+	for (size_t i = 0; i < visited.size(); i++)
+	{
+		if (visited[i])
+			continue;
+
+		bool isCyclic = DFS_containsCycle(g, visited, stack, i);
+
+		if (isCyclic)
+			return true;
+	}
+	
+	return false;
+}
+
 int Dijkstra(const Graph& g, int start, int end, vector<int>& path)
 {
 	vector<int> dist(g.getNumOfVertices(), INT_MAX);
