@@ -11,8 +11,7 @@ bool containsPath(const Graph& g, int start, int end);
 bool connected(const Graph& g);
 bool isCyclic(const Graph& g);
 
-// Tarjan's algorithm
-void topologicalSorting(const Graph& g, vector<int>& topoSort);
+void topologicalSorting(const Graph& g, vector<int>& topoSort); // Tarjan's algorithm
 
 int Dijkstra(const Graph& g, int start, int end, vector<int>& path);
 
