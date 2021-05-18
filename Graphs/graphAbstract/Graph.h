@@ -16,6 +16,7 @@ public:
 	Graph(int numOfVertices, bool oriented) : numOfVertices(numOfVertices), oriented(oriented) {}
 
 	int getNumOfVertices() const;
+	bool isOriented() const;
 	bool existVertex(int vertex) const;
 
 	virtual int addVertex() = 0;
