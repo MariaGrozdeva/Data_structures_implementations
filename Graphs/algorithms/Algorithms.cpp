@@ -140,10 +140,7 @@ bool connected(const Graph& g)
 }
 
 bool DFS_containsCycle(const Graph& g, vector<bool>& visited, vector<bool>& stack, int currentVertex)
-{
-	if (!g.isOriented())
-		throw "The graph should be oriented!";
-		
+{		
 	visited[currentVertex] = true;
 	stack[currentVertex] = true;
 
@@ -166,6 +163,9 @@ bool DFS_containsCycle(const Graph& g, vector<bool>& visited, vector<bool>& stac
 }
 bool isCyclic(const Graph& g)
 {
+	if (!g.isOriented())
+		throw "The graph should be oriented!";
+	
 	vector<bool> visited(g.getNumOfVertices());
 	vector<bool> stack(g.getNumOfVertices());
 
