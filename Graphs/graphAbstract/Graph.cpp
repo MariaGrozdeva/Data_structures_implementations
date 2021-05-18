@@ -4,6 +4,10 @@ int Graph::getNumOfVertices() const
 {
 	return numOfVertices;
 }
+bool Graph::isOriented() const
+{
+	return oriented;
+}
 bool Graph::existVertex(int vertex) const
 {
 	return vertex < numOfVertices;
