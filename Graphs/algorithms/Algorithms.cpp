@@ -133,11 +133,17 @@ bool BFS_connected(const Graph& g)
 }
 bool connected(const Graph& g)
 {
+	if (g.isOriented())
+		throw "The graph should NOT be oriented!";
+	
 	return BFS_connected(g);
 }
 
 bool DFS_containsCycle(const Graph& g, vector<bool>& visited, vector<bool>& stack, int currentVertex)
 {
+	if (!g.isOriented())
+		throw "The graph should be oriented!";
+		
 	visited[currentVertex] = true;
 	stack[currentVertex] = true;
 
