@@ -185,11 +185,7 @@ bool isBipartite(const Graph& g)
 }
 
 bool DFS_containsCycle(const Graph& g, vector<bool>& visited, vector<bool>& stack, int currentVertex)
-<<<<<<< HEAD
 {
-=======
-{		
->>>>>>> 76ee4cd460acfe985a282237a02e823321586b17
 	visited[currentVertex] = true;
 	stack[currentVertex] = true;
 
@@ -212,11 +208,7 @@ bool isCyclic(const Graph& g)
 {
 	if (!g.isOriented())
 		throw "The graph should be oriented!";
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 76ee4cd460acfe985a282237a02e823321586b17
 	vector<bool> visited(g.getNumOfVertices());
 	vector<bool> stack(g.getNumOfVertices());
 
