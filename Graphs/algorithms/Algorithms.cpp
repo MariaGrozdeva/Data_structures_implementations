@@ -139,11 +139,53 @@ bool connected(const Graph& g)
 	return BFS_connected(g);
 }
 
+bool BFS_isBipartite(const Graph& g, vector<int> visited, int start)
+{
+	queue<int> q;
+	q.push(start);
+	visited[start] = true;
+
+	while (!q.empty())
+	{
+		int current = q.front();
+		q.pop();
+
+		vector<pair<int, int>> adjacent = g.getSuccessors(current);
+		size_t currentColour = visited[current];
+
+		for (int i = 0; i < adjacent.size(); i++)
+		{
+			if (visited[adjacent[i].first] == currentColour)
+				return false;
+
+			if (visited[adjacent[i].first])
+				continue;
+
+			q.push(adjacent[i].first);
+			visited[adjacent[i].first] = currentColour == 1 ? 2 : 1;
+		}
+	}
+
+	return true;
+}
+bool isBipartite(const Graph& g)
+{
+	if (g.isOriented())
+		throw "The graph should NOT be oriented!";
+
+	vector<int> visited(g.getNumOfVertices());
+
+	for (int i = 0; i < visited.size(); i++)
+	{
+		if (!visited[i] && !BFS_isBipartite(g, visited, i))
+			return false;
+	}
+
+	return true;
+}
+
 bool DFS_containsCycle(const Graph& g, vector<bool>& visited, vector<bool>& stack, int currentVertex)
 {
-	if (!g.isOriented())
-		throw "The graph should be oriented!";
-		
 	visited[currentVertex] = true;
 	stack[currentVertex] = true;
 
@@ -155,9 +197,7 @@ bool DFS_containsCycle(const Graph& g, vector<bool>& visited, vector<bool>& stac
 		if (stack[current])
 			return true;
 
-		bool containsCycle = DFS_containsCycle(g, visited, stack, current);
-
-		if (containsCycle)
+		if (DFS_containsCycle(g, visited, stack, current))
 			return true;
 	}
 
@@ -166,20 +206,18 @@ bool DFS_containsCycle(const Graph& g, vector<bool>& visited, vector<bool>& stac
 }
 bool isCyclic(const Graph& g)
 {
+	if (!g.isOriented())
+		throw "The graph should be oriented!";
+
 	vector<bool> visited(g.getNumOfVertices());
 	vector<bool> stack(g.getNumOfVertices());
 
 	for (size_t i = 0; i < visited.size(); i++)
 	{
-		if (visited[i])
-			continue;
-
-		bool isCyclic = DFS_containsCycle(g, visited, stack, i);
-
-		if (isCyclic)
+		if (!visited[i] && DFS_containsCycle(g, visited, stack, i))
 			return true;
 	}
-	
+
 	return false;
 }
 

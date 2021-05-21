@@ -9,6 +9,7 @@ void DFS(const Graph& g, int start);
 
 bool containsPath(const Graph& g, int start, int end);
 bool connected(const Graph& g);
+bool isBipartite(const Graph& g);
 bool isCyclic(const Graph& g);
 
 void topologicalSorting(const Graph& g, vector<int>& topoSort); // Tarjan's algorithm
