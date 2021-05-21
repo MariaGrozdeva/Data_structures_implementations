@@ -58,6 +58,30 @@ void DFS(const Graph& g, int start)
 	}
 }
 
+void DFS_rec(const Graph& g, vector<bool>& visited, int currentVertex)
+{
+	visited[currentVertex] = true;
+	cout << currentVertex << endl;
+
+	vector<pair<int, int>> adjacent = g.getSuccessors(currentVertex);
+
+	for (int i = 0; i < adjacent.size(); i++)
+	{
+		if (visited[adjacent[i].first])
+			continue;
+
+		DFS_rec(g, visited, adjacent[i].first);
+	}
+}
+void DFS_rec(const Graph& g, int start)
+{
+	if (!g.existVertex(start))
+		return;
+
+	vector<bool> visited(g.getNumOfVertices());
+	DFS_rec(g, visited, start);
+}
+
 bool BFS_containsPath(const Graph& g, int start, int end)
 {
 	if (!g.existVertex(start))

@@ -6,6 +6,7 @@
 
 void BFS(const Graph& g, int start);
 void DFS(const Graph& g, int start);
+void DFS_rec(const Graph& g, int start);
 
 bool containsPath(const Graph& g, int start, int end);
 bool connected(const Graph& g);
