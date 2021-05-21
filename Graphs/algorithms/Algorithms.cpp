@@ -30,6 +30,7 @@ void BFS(const Graph& g, int start)
 		}
 	}
 }
+
 void DFS(const Graph& g, int start)
 {
 	if (!g.existVertex(start))
@@ -57,7 +58,6 @@ void DFS(const Graph& g, int start)
 			s.push(adjacent[i].first);
 	}
 }
-
 void DFS_rec(const Graph& g, vector<bool>& visited, int currentVertex)
 {
 	visited[currentVertex] = true;
