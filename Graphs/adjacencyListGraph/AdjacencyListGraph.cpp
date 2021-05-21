@@ -98,3 +98,16 @@ bool AdjacencyListGraph::adjacent(int vertex1, int vertex2) const
 	}
 	return false;
 }
+
+AdjacencyListGraph AdjacencyListGraph::getTransposedGraph() const
+{
+	AdjacencyListGraph transposedGraph(getNumOfVertices());
+
+	for (int i = 0; i < adjList.size(); i++)
+	{
+		for (auto j = adjList[i].begin(); j != adjList[i].end(); j++)
+			transposedGraph.addEdge((*j).end, i, (*j).weight);
+	}
+
+	return move(transposedGraph);
+}

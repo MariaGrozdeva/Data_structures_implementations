@@ -25,4 +25,6 @@ public:
 	vector<pair<int, int>> getPredecessors(int vertex) const; // O(n + m)
 
 	bool adjacent(int vertex1, int vertex2) const; // O(n)
+
+	AdjacencyListGraph getTransposedGraph() const; // O(n + m)
 };
