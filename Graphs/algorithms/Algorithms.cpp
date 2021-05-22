@@ -264,7 +264,7 @@ void DFSrec_topologicalSorting(const Graph& g, vector<bool>& visited, stack<int>
 
 	currentRes.push(currentVertex);
 }
-void topologicalSorting(const Graph& g, vector<int>& topoSort, bool calledBySCC = false)
+void topologicalSorting(const Graph& g, vector<int>& topoSort, bool calledBySCC)
 {
 	if (!calledBySCC)
 	{
@@ -337,7 +337,7 @@ void SCC(const AdjacencyListGraph& g)
 
 	AdjacencyListGraph transposed = g.getTransposedGraph();
 
-	DFSrec(transposed, topoSort);
+	DFSrec_SCC(transposed, topoSort);
 }
 
 int Dijkstra(const Graph& g, int start, int end, vector<int>& path)
