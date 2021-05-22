@@ -264,10 +264,13 @@ void DFSrec_topologicalSorting(const Graph& g, vector<bool>& visited, stack<int>
 
 	currentRes.push(currentVertex);
 }
-void topologicalSorting(const Graph& g, vector<int>& topoSort)
+void topologicalSorting(const Graph& g, vector<int>& topoSort, bool calledBySCC = false)
 {
-	if (isCyclic(g))
-		throw "Only acyclic graphs can be sorted topologically!";
+	if (!calledBySCC)
+	{
+		if (isCyclic(g))
+			throw "Only acyclic graphs can be sorted topologically!";
+	}
 
 	vector<bool> visited(g.getNumOfVertices());
 	stack<int> result;
@@ -285,6 +288,56 @@ void topologicalSorting(const Graph& g, vector<int>& topoSort)
 		topoSort.push_back(result.top());
 		result.pop();
 	}
+}
+
+void DFS_rec_SCC(const Graph& g, vector<bool>& visited, vector<bool>& lastlyVisited, int currentVertex)
+{
+	visited[currentVertex] = true;
+	lastlyVisited[currentVertex] = true;
+
+	vector<pair<int, int>> adjacent = g.getSuccessors(currentVertex);
+
+	for (int i = 0; i < adjacent.size(); i++)
+	{
+		if (visited[adjacent[i].first])
+			continue;
+
+		DFS_rec_SCC(g, visited, lastlyVisited, adjacent[i].first);
+	}
+}
+void DFSrec_SCC(const Graph& g, vector<int> topoSort)
+{
+	vector<bool> visited(g.getNumOfVertices());
+
+	cout << "The strongly connected components are:" << endl;
+
+	for (int i = 0; i < topoSort.size(); i++)
+	{
+		if (visited[topoSort[i]])
+			continue;
+
+		vector<bool> lastlyVisited(g.getNumOfVertices());
+
+		DFS_rec_SCC(g, visited, lastlyVisited, topoSort[i]);
+
+		for (int j = 0; j < lastlyVisited.size(); j++)
+		{
+			if (lastlyVisited[j])
+				cout << j << " ";
+		}
+		cout << endl;
+
+		lastlyVisited.clear();
+	}
+}
+void SCC(const AdjacencyListGraph& g)
+{
+	vector<int> topoSort;
+	topologicalSorting(g, topoSort, true);
+
+	AdjacencyListGraph transposed = g.getTransposedGraph();
+
+	DFSrec(transposed, topoSort);
 }
 
 int Dijkstra(const Graph& g, int start, int end, vector<int>& path)

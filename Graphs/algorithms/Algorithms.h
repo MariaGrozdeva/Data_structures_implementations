@@ -14,6 +14,7 @@ bool isBipartite(const Graph& g);
 bool isCyclic(const Graph& g);
 
 void topologicalSorting(const Graph& g, vector<int>& topoSort); // Tarjan's algorithm
+void SCC(const AdjacencyListGraph& g); // Kosaraju's algorithm for finding all strongly connected components
 
 int Dijkstra(const Graph& g, int start, int end, vector<int>& path);
 
