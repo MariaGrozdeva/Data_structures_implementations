@@ -407,12 +407,13 @@ int Prim(const Graph& g, Graph& mst)
 		throw "The graph should NOT be oriented!";
 
 	int mstWeight = 0;
+	int addedEdges = 0;
+	
 	vector<bool> visited(g.getNumOfVertices(), false);
 
 	auto comp = [](const tuple<int, int, int>& lhs, const tuple<int, int, int>& rhs) { return get<2>(lhs) > get<2>(rhs); };
 	priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, decltype(comp)> q(comp);
 
-	int addedEdges = 0;
 	q.push(make_tuple(0, 0, 0)); // virtual edge for the start
 
 	while (addedEdges < g.getNumOfVertices() - 1)
