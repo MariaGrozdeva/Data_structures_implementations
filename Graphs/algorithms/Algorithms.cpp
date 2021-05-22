@@ -403,6 +403,9 @@ int Dijkstra(const Graph& g, int start, int end, vector<int>& path)
 
 int Prim(const Graph& g, Graph& mst)
 {
+        if (g.isOriented())
+		throw "The graph should NOT be oriented!";
+
 	int mstWeight = 0;
 	vector<bool> visited(g.getNumOfVertices(), false);
 
