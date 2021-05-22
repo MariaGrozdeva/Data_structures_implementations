@@ -2,7 +2,7 @@
 #include <stack>
 #include <functional>
 
-#include "Graph.h"
+#include "AdjacencyListGraph.h"
 
 void BFS(const Graph& g, int start);
 void DFS(const Graph& g, int start);
