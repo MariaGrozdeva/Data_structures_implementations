@@ -22,10 +22,10 @@ public:
 	void insertWithPriority(T el); // O(log(n))
 	T pullHighestPriorityElement(); // O(log(n))
 
-	bool isEmpty(); // O(1)
+	bool isEmpty() const; // O(1)
 
-	void print_rec(int elIndex, int space);
-	void print();
+	void print_rec(int elIndex, int space) const;
+	void print() const;
 };
 
 template <typename T>
@@ -129,13 +129,13 @@ T PriorityQueue<T>::pullHighestPriorityElement()
 }
 
 template <typename T>
-bool PriorityQueue<T>::isEmpty()
+bool PriorityQueue<T>::isEmpty() const
 {
 	return data.size() == 0;
 }
 
 template <typename T>
-void PriorityQueue<T>::print_rec(int elIndex, int space)
+void PriorityQueue<T>::print_rec(int elIndex, int space) const
 {
 	const int SPACES_COUNT = 10;
 
@@ -154,7 +154,7 @@ void PriorityQueue<T>::print_rec(int elIndex, int space)
 	print_rec(leftChild(elIndex), space);
 }
 template <typename T>
-void PriorityQueue<T>::print()
+void PriorityQueue<T>::print() const
 {
 	print_rec(0, 0);
 }
