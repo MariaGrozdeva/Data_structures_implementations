@@ -406,6 +406,7 @@ vector<vector<int>> FloydWarshall(const Graph& g)
 	vector<vector<int>> minDistances(g.getNumOfVertices(), vector<int>(g.getNumOfVertices(), INT_MAX));
 	vector<pair<int, int>> successors;
 
+	// mark all edges
 	for (int i = 0; i < g.getNumOfVertices(); i++)
 	{
 		successors = g.getSuccessors(i);
