@@ -401,6 +401,39 @@ int Dijkstra(const Graph& g, int start, int end, vector<int>& path)
 	return INT_MAX;
 }
 
+vector<vector<int>> FloydWarshall(const Graph& g)
+{
+	vector<vector<int>> minDistances(g.getNumOfVertices(), vector<int>(g.getNumOfVertices(), INT_MAX));
+	vector<pair<int, int>> successors;
+
+	for (int i = 0; i < g.getNumOfVertices(); i++)
+	{
+		successors = g.getSuccessors(i);
+		for (int j = 0; j < successors.size(); j++)
+			minDistances[i][successors[j].first] = successors[j].second;
+	}
+
+	for (int i = 0; i < g.getNumOfVertices(); i++)
+		minDistances[i][i] = 0;
+
+	for (int k = 0; k < g.getNumOfVertices(); k++) // intermediate vertices
+	{
+		for (int i = 0; i < g.getNumOfVertices(); i++) // start vertex
+		{
+			for (int j = 0; j < g.getNumOfVertices(); j++) // end vertex
+			{
+				if (minDistances[i][j] > minDistances[i][k] + minDistances[k][j])
+				{
+					if (minDistances[i][k] != INT_MAX && minDistances[k][j] != INT_MAX)
+						minDistances[i][j] = minDistances[i][k] + minDistances[k][j];
+				}
+			}
+		}
+	}
+
+	return move(minDistances);
+}
+
 int Prim(const Graph& g, Graph& mst)
 {
         if (g.isOriented())
