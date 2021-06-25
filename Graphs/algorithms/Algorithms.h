@@ -17,5 +17,6 @@ void topologicalSorting(const Graph& g, vector<int>& topoSort, bool calledBySCC 
 void SCC(const AdjacencyListGraph& g); // Kosaraju's algorithm for finding all strongly connected components
 
 int Dijkstra(const Graph& g, int start, int end, vector<int>& path);
+vector<vector<int>> FloydWarshall(const Graph& g); // Dynamic programming
 
 int Prim(const Graph& g, Graph& mst);
