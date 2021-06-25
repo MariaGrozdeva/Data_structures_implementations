@@ -435,6 +435,26 @@ vector<vector<int>> FloydWarshall(const Graph& g)
 	return move(minDistances);
 }
 
+size_t countPathsInDag(const Graph& g, int start, int end)
+{
+	vector<size_t> countPaths(g.getNumOfVertices());
+	countPaths[start] = 1;
+
+	vector<int> topoSort;
+	topologicalSorting(g, topoSort);
+
+	vector<pair<int, int>> successors;
+
+	for (int i = 0; i < topoSort.size(); i++)
+	{
+		successors = g.getSuccessors(i);
+		for (int j = 0; j < successors.size(); j++)
+			countPaths[successors[j].first] += countPaths[i];
+	}
+
+	return countPaths[end];
+}
+
 int Prim(const Graph& g, Graph& mst)
 {
         if (g.isOriented())
@@ -480,3 +500,4 @@ int Prim(const Graph& g, Graph& mst)
 
 	return mstWeight;
 }
+
