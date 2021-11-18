@@ -11,7 +11,7 @@ struct NodeFull
 	T data;
 	vector<NodeFull<T>*> children;
 
-	NodeFull(T data) : data(data) {}
+	NodeFull(const T& data) : data(data) {}
 };
 template <typename T>
 void print(NodeFull<T>* root)
@@ -31,9 +31,9 @@ void free(NodeFull<T>* root)
 }
 
 
-// Задача 1: Да се напише функция, която приема произволно дърво и връща дали дадено число се съдържа в него.
+// Задача 1: Да се напише функция, която приема произволно дърво и елемент и връща дали елементът се съдържа в него.  
 template <typename T>
-bool contains(NodeFull<T>* root, T element)
+bool contains(NodeFull<T>* root, const T& element)
 {
 	int size = root->children.size();
 
@@ -48,7 +48,7 @@ bool contains(NodeFull<T>* root, T element)
 	return false;
 }
 
-// Задача 2: Да се напише функция, която приема произволно дърво и връща сумата на елементите в него.
+// Задача 2: Да се напише функция, която приема произволно дърво от числа и връща сумата на числата в него.  
 template <typename T>
 int sum(NodeFull<T>* root)
 {
@@ -59,7 +59,7 @@ int sum(NodeFull<T>* root)
 	return sum;
 }
 
-// Задача 3: Да се напише функция, която приема произволно дърво и връща най-големият елемент в него.
+// Задача 3:  Да се напише функция, която приема произволно дърво и връща най-големия елемент в него.  
 template <typename T>
 T maxT(NodeFull<T>* root)
 {
