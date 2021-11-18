@@ -63,6 +63,9 @@ int sum(NodeFull<T>* root)
 template <typename T>
 T maxT(NodeFull<T>* root)
 {
+	if (root == nullptr)
+		return INT_MIN;
+	
 	T maxEl = root->data;
 
 	for (int i = 0; i < root->children.size(); i++)
