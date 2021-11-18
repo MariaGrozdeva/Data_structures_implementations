@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -37,16 +37,16 @@ void free(Node<T>* root)
 	delete root;
 }
 
-// Задача 1: Да се напише функция, която приема двоично дърво и връща дали дадено число се съдържа в него.
+// Задача 1: Да се напише функция, която приема двоично дърво и елемент и връща дали елементът се съдържа в него.  
 template <typename T>
-bool contains(Node<T>* root, T element)
+bool contains(Node<T>* root, const T& element)
 {
 	if (root == nullptr)
 		return false;
 	return root->data == element || contains(root->left, element) || contains(root->right, element);
 }
 
-// Задача 2: Да се напише функция, която приема двоично дърво и връща сумата на елементите в него.
+// Задача 2: Да се напише функция, която приема двоично дърво от числа и връща сумата на числата в него.  
 template <typename T>
 int sum(Node<T>* root)
 {
@@ -56,7 +56,7 @@ int sum(Node<T>* root)
 	return root->data + sum(root->left) + sum(root->right);
 }
 
-// Задача 3: Да се напише функция, която приема двоично дърво и връща най-големият елемент в него.
+// Задача 3: Да се напише функция, която приема двоично дърво и връща най-големия елемент в него.  
 template <typename T>
 T maxBT(Node<T>* root)
 {
