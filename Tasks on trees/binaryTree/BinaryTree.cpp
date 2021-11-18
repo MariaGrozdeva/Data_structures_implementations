@@ -60,6 +60,9 @@ int sum(Node<T>* root)
 template <typename T>
 T maxBT(Node<T>* root)
 {
+	if (root == nullptr)
+		return INT_MIN;
+	
 	if (root->left == nullptr && root->right == nullptr)
 		return root->data;
 
