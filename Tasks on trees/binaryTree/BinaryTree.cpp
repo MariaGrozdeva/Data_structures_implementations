@@ -12,7 +12,7 @@ struct Node
 	Node* left;
 	Node* right;
 
-	Node(T data) : data(data), left(nullptr), right(nullptr) {}
+	Node(const T& data) : data(data), left(nullptr), right(nullptr) {}
 };
 
 template <typename T>
