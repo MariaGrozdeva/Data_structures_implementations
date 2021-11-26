@@ -62,15 +62,6 @@ T maxBT(Node<T>* root)
 {
 	if (root == nullptr)
 		return INT_MIN;
-	
-	if (root->left == nullptr && root->right == nullptr)
-		return root->data;
-
-	if (root->left != nullptr && root->right == nullptr)
-		return max(root->data, maxBT(root->left));
-
-	if (root->left == nullptr && root->right != nullptr)
-		return max(root->data, maxBT(root->right));
 
 	return max(root->data, max(maxBT(root->left), maxBT(root->right)));
 }
