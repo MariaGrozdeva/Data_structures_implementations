@@ -160,7 +160,7 @@ T sumOfLeaves(Node<T>* root)
 template<typename T>
 void inorderTraversal(Node<T>* root)
 {
-	printBT(root);
+	print(root);
 }
 
 // Задача 11: Напишете функция, която приема указател към корена на дърво и цяло число n и принтира елементите, които се намират на ниво n.
