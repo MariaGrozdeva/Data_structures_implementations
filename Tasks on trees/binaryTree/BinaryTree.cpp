@@ -145,10 +145,10 @@ void fillWords(Node<char>* root, vector<string>& v, string currentWord)
 template<typename T>
 T sumOfLeaves(Node<T>* root)
 {
-	int sum = 0;
-	if (root == nullptr)
+	if (!root)
 		return 0;
-	if (root->left == nullptr && root->right == nullptr)
+
+	if (!root->left && !root->right)
 		return root->data;
 
 	return sumOfLeaves(root->left) + sumOfLeaves(root->right);
