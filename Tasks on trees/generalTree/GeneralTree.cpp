@@ -158,7 +158,8 @@ void fillWords(NodeFull<char>* root, vector<string>& v, string currentWord)
 template<typename T>
 T sumOfLeaves(NodeFull<T>* root)
 {
-	int sum = 0;
+	T sum = 0;
+	
 	if (root->children.size() == 0)
 		return root->data;
 
