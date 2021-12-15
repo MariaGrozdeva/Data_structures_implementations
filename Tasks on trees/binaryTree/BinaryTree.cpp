@@ -489,8 +489,9 @@ bool sameOnLevel(Node<int>* root1, Node<int>* root2)
 // които се намират на нечетно ниво и имат само десен наследник.
 int sumOfNodesOnOddLevelsHelper(Node<int>* root, int level)
 {
-	if (root == nullptr)
+	if (!root)
 		return 0;
+	
 	if (level % 2)
 	{
 		if (root->right && !root->left)
