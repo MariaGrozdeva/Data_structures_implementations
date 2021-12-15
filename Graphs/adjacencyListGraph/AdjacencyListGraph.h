@@ -16,7 +16,7 @@ public:
 	AdjacencyListGraph(int numOfVertices, bool oriented = true);
 
 	int addVertex(); // O(1)
-	void removeVertex(int vertex); // O(m)
+	void removeVertex(int vertex); // O(n+m)
 
 	void addEdge(int start, int end, int weight); // O(1)
 	void removeEdge(int start, int end); // O(m)
