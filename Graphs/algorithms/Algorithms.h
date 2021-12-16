@@ -24,4 +24,4 @@ vector<vector<int>> FloydWarshall(const Graph& g); // Dynamic programming
 size_t countPathsInDag(const Graph& g, int start, int end) // Dynamic programming
 
 int Prim(const Graph& g, Graph& mst);
-
+int Kruskal(const AdjacencyListGraph& g, Graph& mst)
