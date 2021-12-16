@@ -164,7 +164,7 @@ bool connected(const Graph& g)
 	return BFS_connected(g);
 }
 
-bool BFS_isBipartite(const Graph& g, vector<int> visited, int start)
+bool BFS_isBipartite(const Graph& g, vector<int>& visited, int start)
 {
 	queue<int> q;
 	q.push(start);
