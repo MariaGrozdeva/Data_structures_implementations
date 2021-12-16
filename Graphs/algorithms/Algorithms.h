@@ -21,7 +21,7 @@ void SCC(const AdjacencyListGraph& g); // Kosaraju's algorithm for finding all s
 int Dijkstra(const Graph& g, int start, int end, vector<int>& path);
 vector<vector<int>> FloydWarshall(const Graph& g); // Dynamic programming
 
-size_t countPathsInDag(const Graph& g, int start, int end) // Dynamic programming
+size_t countPathsInDag(const Graph& g, int start, int end); // Dynamic programming
 
 int Prim(const Graph& g, Graph& mst);
 int Kruskal(const AdjacencyListGraph& g, Graph& mst)
