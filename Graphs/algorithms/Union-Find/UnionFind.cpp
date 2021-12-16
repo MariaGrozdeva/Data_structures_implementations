@@ -26,7 +26,7 @@ bool UnionFind::Union(int n, int k) // Union by rank
 
 	return true;
 }
-int UnionFind::Find(int n)  // Returns the leader of the set where n belongs to
+int UnionFind::Find(int n) // Returns the leader of the set where n belongs to
 {
 	if (parents[n] == n)
 		return n;
