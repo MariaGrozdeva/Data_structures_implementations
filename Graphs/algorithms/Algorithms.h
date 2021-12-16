@@ -1,8 +1,10 @@
 #include <queue>
 #include <stack>
+#include <algorithm>
 #include <functional>
 
 #include "AdjacencyListGraph.h"
+#include "UnionFind.h"
 
 void BFS(const Graph& g, int start);
 void DFS(const Graph& g, int start);
