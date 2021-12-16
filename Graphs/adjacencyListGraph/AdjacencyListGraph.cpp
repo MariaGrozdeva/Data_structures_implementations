@@ -99,6 +99,15 @@ bool AdjacencyListGraph::adjacent(int vertex1, int vertex2) const
 	return false;
 }
 
+void AdjacencyListGraph::getEdges(vector<tuple<int, int, int>>& edges) const
+{
+	for (int i = 0; i < adjList.size(); i++)
+	{
+		for (auto it = adjList[i].begin(); it != adjList[i].end(); ++it)
+			edges.push_back(make_tuple(i, it->end, it->weight));
+	}
+}
+
 AdjacencyListGraph AdjacencyListGraph::getTransposedGraph() const
 {
 	AdjacencyListGraph transposedGraph(getNumOfVertices());
