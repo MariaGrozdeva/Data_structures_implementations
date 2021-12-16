@@ -501,3 +501,41 @@ int Prim(const Graph& g, Graph& mst)
 	return mstWeight;
 }
 
+int Kruskal(const AdjacencyListGraph& g, Graph& mst)
+{
+	if (g.isOriented())
+		throw "The graph should NOT be oriented!";
+
+	int mstWeight = 0;
+	size_t addedEdges = 0;
+
+	vector<tuple<int, int, int>> edges;
+	g.getEdges(edges);
+
+	sort(edges.begin(), edges.end(),
+		[](const tuple<int, int, int>& lhs, const tuple<int, int, int>& rhs)
+		{
+			return get<2>(lhs) < get<2>(rhs);
+		});
+
+	UnionFind uf(g.getNumOfVertices());
+
+	for (size_t i = 0; addedEdges < g.getNumOfVertices() - 1; i++)
+	{
+		tuple<int, int, int> currentEdge = edges[i];
+		int currentEdgeStart = get<0>(currentEdge);
+		int currentEdgeEnd = get<1>(currentEdge);
+		int currentEdgeWeight = get<2>(currentEdge);
+
+		if (!uf.Union(currentEdgeStart, currentEdgeEnd)) // If edge "start---end" is added, it will form a cycle
+			continue; 
+
+		cout << "Added edge: " << currentEdgeStart << "----" << currentEdgeEnd << " with weight: " << currentEdgeWeight << endl;
+
+		mst.addEdge(currentEdgeStart, currentEdgeEnd, currentEdgeWeight);
+		mstWeight += currentEdgeWeight;
+		addedEdges++;
+	}
+
+	return mstWeight;
+}
