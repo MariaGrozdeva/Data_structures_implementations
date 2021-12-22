@@ -536,7 +536,7 @@ int getMinNumOfPeopleInCharge(const Graph& g)
 	return minNumOfPeopleInCharge;
 }
 
-// Задача 6: Напишете функция, която приема граф, чийто върхове са от символи, и по подадена дума проверява дали има такъв път в графа.
+// Задача 6: Напишете функция, която приема граф, чиито върхове са от символи, и по подадена дума проверява дали има такъв път в графа.
 bool DFS_containsPath(const GraphChar& g, char start, char end, const string& word)
 {
 	vector<char> visited(g.getVertexCount(), false);
