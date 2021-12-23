@@ -660,7 +660,7 @@ int getSumOfMaxElInComponentOfGraph(const Graph& g)
 // Множеството от елементите на двете структури е едно и също, като в рамките на всяка една от структурите символите са уникални. 
 // Напишете функция, която проверява дали съществува път от корена на дървото до листо, който да отговаря на път в графа, 
 // и ако има такъв, да го извежда (ЗАБ.: достатъчно е да изведете само един път, който да отговаря на условието).
-bool checkIfGraphContainsPathFromTree(Node<char>* root, GraphChar g)
+bool checkIfGraphContainsPathFromTree(Node<char>* root, const GraphChar& g)
 {
 	vector<string> paths;
 	getWordsDFS(root, paths);
