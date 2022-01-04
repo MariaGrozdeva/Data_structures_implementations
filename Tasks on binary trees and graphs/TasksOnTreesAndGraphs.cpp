@@ -130,7 +130,7 @@ void getWordsDFS(Node<char>* root, vector<string>& words, string tempWord = "")
 	getWordsDFS(root->right, words, tempWord);
 }
 
-// Задача 3: Напишете функция, която приема двоично дърво и връща дали в дървото има път от листо до друго листо само с четни числа.
+// Задача 3: Напишете функция, която приема двоично дърво и връща дали в дървото има път от листо до друго листо, "минаващ" през корена, само с четни числа.
 void getAllPaths(Node<int>* root, vector<vector<int>>& paths, vector<int>& currentPath)
 {
 	if (!root)
