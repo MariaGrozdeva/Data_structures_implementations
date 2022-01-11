@@ -511,7 +511,7 @@ struct Interval
 
 	Interval(int start, int end) : start(start), end(end) {}
 
-	int getAverage()
+	int getAverage() const
 	{
 		return (start + end) / 2;
 	}
@@ -523,19 +523,19 @@ struct NodeInterval
 	NodeInterval* left;
 	NodeInterval* right;
 
-	NodeInterval(Interval interval) : interval(interval), left(nullptr), right(nullptr) {}
+	NodeInterval(const Interval& interval) : interval(interval), left(nullptr), right(nullptr) {}
 };
 
-bool Intersection(Interval int1, Interval int2)
+bool intersection(const Interval& int1, const Interval& int2)
 {
 	return !(int1.end < int2.start || int1.start > int2.end);
 }
-bool noEmptyIntersection(NodeInterval* root, Interval interval)
+bool noEmptyIntersection(NodeInterval* root, const Interval& interval)
 {
 	if (!root)
 		return true;
 
-	if (!Intersection(root->interval, interval))
+	if (!intersection(root->interval, interval))
 		return false;
 
 	return noEmptyIntersection(root->left, interval) && noEmptyIntersection(root->right, interval);
@@ -543,9 +543,7 @@ bool noEmptyIntersection(NodeInterval* root, Interval interval)
 
 void getMaxIntervalHelper(NodeInterval* currRoot, NodeInterval*& currMax, NodeInterval* root)
 {
-	if (!currRoot)
-		return;
-	if (currMax)
+	if (!currRoot || currMax)
 		return;
 
 	getMaxIntervalHelper(currRoot->right, currMax, root);
@@ -564,7 +562,7 @@ Interval getMaxInterval(NodeInterval* root)
 	getMaxIntervalHelper(root, currMax, root);
 
 	if (currMax == nullptr)
-		return Interval(0, 0);
+		return move(Interval(0, 0));
 
 	return currMax->interval;
 }
@@ -625,5 +623,5 @@ int main()
 	n2->left = n4;
 	n2->right = n5;
 
-	cout << getMaxInterval(root).start << " " << getMaxInterval(root).end;
+	cout << '[' << getMaxInterval(root).start << ' ' << getMaxInterval(root).end << ']';
 }
